@@ -6,18 +6,18 @@ Twitch.js is a library that allows you to easily create chat bots or interact wi
 
 ### NPM
 ```bash
-npm install twitch.js
+npm install @twitch.js/chat
 ```
 
 ### Yarn
 ```bash
-yarn add twitch.js
+yarn add @twitch.js/chat
 ```
 
 ## Example Usage
 
 ```js
-import { chat } from 'twitch.js';
+import { chat } from '@twitch.js/chat';
 
 chat.connect({
   user: process.env.CHAT_USER,
