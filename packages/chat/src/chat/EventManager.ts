@@ -450,21 +450,26 @@ export default class EventManager extends EventEmitter {
   }
 
   private _privmsg (data: any, tags: any) {
+    const user = {
+      name: data.user,
+      tags,
+    };
+
     if (tags.bits !== undefined) {
-      this.emit('cheer', data.channel, data.user, data.message, data.bits);
+      this.emit('cheer', data.channel, user, data.message, data.bits);
     } else if (data.message.charCodeAt(0) === 33) {
       const chunks = data.message.split(' ');
       const args = data.message.slice(chunks[0].length + 2);
 
-      this.emit('command', data.channel, data.user, chunks[0], args);
+      this.emit('command', data.channel, user, chunks[0], args);
     } else {
       const action = '\u0001ACTION';
 
       if (data.message.startsWith(action)) {
         const message = data.message.slice(action.length + 1, data.message.length - 2);
-        this.emit('action', data.channel, data.user, message);
+        this.emit('action', data.channel, user, message);
       } else {
-        this.emit('chat', data.channel, data.user, data.message);
+        this.emit('chat', data.channel, user, data.message);
       }
     }
   }
