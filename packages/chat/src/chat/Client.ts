@@ -61,6 +61,10 @@ export default class Client extends Socket {
   async action (channel: string, message: string): Promise<void> {
     return this.sendCommand(channel, `.me ${message}`, 'action');
   }
+
+  async announce (channel: string, message: string, highlight: string = ''): Promise<void> {
+    return this.sendCommand(channel, `.announce${highlight} ${message}`, 'announce');
+  }
   
   async ban (channel: string, user: string, reason: string = 'None provided'): Promise<void> {
     return this.sendCommand(channel, `.ban ${user} ${reason}`, 'ban');
